@@ -1,0 +1,139 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk 32
+    signingConfigs {
+        config {
+            enableV3Signing true
+            enableV4Signing true
+        }
+        release {
+            storeFile file('D:\\yu.jks')
+            storePassword 'Qinsansui233...'
+            keyAlias 'wusui'
+            keyPassword 'Qinsansui233...'
+        }
+        debug {
+            storeFile file('D:\\yu.jks')
+            storePassword 'Qinsansui233...'
+            keyAlias 'wusui'
+            keyPassword 'Qinsansui233...'
+        }
+    }
+    defaultConfig {
+        applicationId "zyx.and.dyj.autocheck"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.01|Students"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable true
+            jniDebuggable true
+            renderscriptDebuggable false
+//            zipAlignEnabled true     //Zipalign优化
+//            shrinkResources true    // 移除无用的resource文件
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            signingConfig signingConfigs.release
+            zipAlignEnabled true     //Zipalign优化
+            shrinkResources true    // 移除无用的resource文件
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation 'androidx.activity:activity-compose:1.4.0'
+    implementation 'androidx.compose.material3:material3:1.0.0-alpha01'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+
+    implementation 'com.blankj:utilcodex:1.31.0'
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+    def lifecycle_version = "2.5.0-alpha05"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
+    implementation("androidx.compose.runtime:runtime-livedata:1.2.0-alpha06")
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    // Saved state module for ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+    // Annotation processor
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    implementation "androidx.compose.runtime:runtime:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.foundation:foundation:$compose_version"
+    implementation "androidx.compose.animation:animation:$compose_version"
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
+
+//    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+//    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    //PagerView And Glide
+    implementation 'com.google.accompanist:accompanist-pager:0.18.0'
+    implementation 'io.coil-kt:coil-compose:1.3.2'
+    //systemuicontroller
+    implementation 'com.google.accompanist:accompanist-systemuicontroller:0.18.0'
+    implementation "androidx.navigation:navigation-compose:2.5.0-alpha03"
+//    runtimeOnly("io.ktor:ktor-client-core:2.0.0-ide-debug-eap-225")
+    def paging_version = "3.1.1"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha14"
+
+    runtimeOnly 'io.ktor:ktor-client-android:2.0.2'
+    implementation 'io.ktor:ktor-client-gson:2.0.2'
+    runtimeOnly 'io.ktor:ktor-client-core:2.0.2'
+    implementation 'io.ktor:ktor-client-content-negotiation-jvm:2.0.2'
+    runtimeOnly 'io.ktor:ktor-client-android-jvm:2.0.2'
+    implementation 'com.blankj:utilcodex:1.31.0'
+
+}
