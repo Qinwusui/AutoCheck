@@ -39,21 +39,17 @@ object Repository {
     }
 
     fun addUser(stuData: StuData): Boolean {
-        val list = getUser()
+        val list = getUser().toMutableSet()
         if (list.isEmpty()) {
             list.add(stuData)
             saveUserData(gson.toJson(list))
             return true
         }
-        for (i in list) {
-            if (i.name != stuData.name) {
-                list.add(stuData)
-            } else {
-                return false
-            }
+        if (list.add(stuData)) {
+            saveUserData(gson.toJson(list))
+            return true
         }
-        saveUserData(gson.toJson(list))
-        return true
+        return false
     }
 
     private fun saveUserData(str: String = "") {
